@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:all_sensors/all_sensors.dart';
+
+main()=> runApp(TEP());
+
+class  TEP extends StatefulWidget {
+  @override
+  createState() => Estado();
+}
+class Estado extends State<TEP> {
+
+  List<double> acelerometro;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    accelerometerEvents.listen((AccelerometerEvent event) {
+      setState(() {
+        acelerometro = [event.x, event.y, event.z];
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("Sensores"
+            "${acelerometro[0].roundToDouble()},"
+            "${acelerometro[1].roundToDouble()},"
+            "${acelerometro[2].roundToDouble()},"
+        ),
+      ),
+      body: Container(
+          child:  Image(
+              image: AssetImage("images/gatsuki.png"),
+          ),
+      )
+    ),
+
+  );
+
+
+
+}
